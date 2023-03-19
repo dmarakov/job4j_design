@@ -14,7 +14,7 @@ class NameLoadTest {
     }
 
     @Test
-    void InputArrayIsEmpty() {
+    void inputArrayIsEmpty() {
         NameLoad nameLoad = new NameLoad();
         assertThatThrownBy(nameLoad::parse)
                 .isInstanceOf(IllegalArgumentException.class)
