@@ -10,17 +10,17 @@ public class SimpleLinkedList<E> implements LinkedList<E> {
     private int size = 0;
     private int modCount = 0;
     private Node<E> head;
-    private Node<E> tail;
 
     @Override
     public void add(E value) {
-        Node<E> l = tail;
-        Node<E> newNode = new Node<>(value, null, l);
-        tail = newNode;
-        if (l == null) {
-            head = newNode;
+        Node<E> f = head;
+        if (f == null) {
+            head = new Node<>(value, null);
         } else {
-            l.next = newNode;
+            while (f.next != null) {
+                f = f.next;
+            }
+            f.next = new Node<>(value, null);
         }
         size++;
         modCount++;
@@ -29,17 +29,9 @@ public class SimpleLinkedList<E> implements LinkedList<E> {
     @Override
     public E get(int index) {
         Objects.checkIndex(index, size);
-        Node<E> rsl;
-        if ((size / 2) > index) {
-            rsl = head;
-            for (int i = 0; i < index; i++) {
-                rsl = rsl.next;
-            }
-        } else {
-            rsl = tail;
-            for (int i = size - 1; i > index; i--) {
-                rsl = rsl.prev;
-            }
+        Node<E> rsl = head;
+        for (int i = 0; i < index; i++) {
+            rsl = rsl.next;
         }
         return rsl.item;
     }
@@ -73,12 +65,10 @@ public class SimpleLinkedList<E> implements LinkedList<E> {
     private static class Node<E> {
         private final E item;
         private Node<E> next;
-        private final Node<E> prev;
 
-        Node(E element, Node<E> next, Node<E> prev) {
+        Node(E element, Node<E> next) {
             this.item = element;
             this.next = next;
-            this.prev = prev;
         }
     }
 }
