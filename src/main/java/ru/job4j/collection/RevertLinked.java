@@ -56,7 +56,7 @@ public class RevertLinked<T> implements Iterable<T> {
     }
 
     public boolean revert() {
-        var rsl = false;
+        var rsl = size > 1;
         if (size > 1) {
             Node<T> current = head;
             Node<T> prev;
@@ -70,7 +70,6 @@ public class RevertLinked<T> implements Iterable<T> {
             }
             head.next = null;
             head = current;
-            rsl = true;
         }
         return rsl;
     }
