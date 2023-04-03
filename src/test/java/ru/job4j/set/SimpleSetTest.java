@@ -18,6 +18,23 @@ class SimpleSetTest {
     }
 
     @Test
+    void whenAddSomeElementsNonNull() {
+        Set<Integer> set = new SimpleSet<>();
+        assertThat(set.contains(1)).isFalse();
+        assertThat(set.add(1)).isTrue();
+        assertThat(set.contains(1)).isTrue();
+        assertThat(set.add(1)).isFalse();
+        assertThat(set.contains(2)).isFalse();
+        assertThat(set.add(2)).isTrue();
+        assertThat(set.contains(2)).isTrue();
+        assertThat(set.add(2)).isFalse();
+        assertThat(set.contains(3)).isFalse();
+        assertThat(set.add(3)).isTrue();
+        assertThat(set.contains(3)).isTrue();
+        assertThat(set.add(3)).isFalse();
+    }
+
+    @Test
     void whenAddNull() {
         Set<Integer> set = new SimpleSet<>();
         assertThat(set.add(null)).isTrue();
