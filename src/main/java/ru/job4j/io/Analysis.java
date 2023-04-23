@@ -12,7 +12,7 @@ public class Analysis {
                 String[] splitLine = line.split(" ");
                 if (("400".equals(splitLine[0]) || "500".equals(splitLine[0])) != isUnavailable) {
                     isUnavailable = !isUnavailable;
-                    out.append(splitLine[1]).append(isUnavailable ? ";" : ";" + System.lineSeparator());
+                    out.append(splitLine[1]).append(";").append(isUnavailable ? "" : System.lineSeparator());
                 }
             }
         } catch (IOException e) {
