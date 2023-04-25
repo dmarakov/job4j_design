@@ -11,18 +11,18 @@ import java.util.List;
 import java.util.Map;
 
 public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
-    Map<FileProperty, Path> map = new HashMap<>();
-    List<Path> list = new ArrayList<>();
-    FileProperty fileProperty;
+    private final Map<FileProperty, Path> map = new HashMap<>();
+    private final List<Path> list = new ArrayList<>();
 
 
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-        fileProperty = new FileProperty(attrs.size(), file.toFile().getName());
+        FileProperty fileProperty = new FileProperty(attrs.size(), file.toFile().getName());
         if (!map.containsKey(fileProperty)) {
             map.put(fileProperty, file);
         } else {
             list.add(file);
+            list.add(map.get(fileProperty));
         }
         return FileVisitResult.CONTINUE;
     }
