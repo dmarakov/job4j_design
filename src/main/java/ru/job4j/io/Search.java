@@ -21,6 +21,9 @@ public class Search {
     }
 
     public static void validation(String[] args) {
+        if (args.length == 0) {
+            throw new IllegalArgumentException("The number of parameters passed must be 2");
+        }
         if (args[0].isEmpty()) {
             throw new IllegalArgumentException("Root folder is null. Usage ROOT_FOLDER.");
         }
