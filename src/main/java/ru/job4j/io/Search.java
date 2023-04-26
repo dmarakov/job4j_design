@@ -21,13 +21,13 @@ public class Search {
     }
 
     public static void validation(String[] args) {
-        if (args.length < 2) {
+        if (args.length != 2) {
             throw new IllegalArgumentException("The number of parameters passed must be 2");
         }
-        if (args[0].isEmpty()) {
+        if (!Files.exists(Path.of(args[0]))) {
             throw new IllegalArgumentException("Root folder is null. Usage ROOT_FOLDER.");
         }
-        if (args[1].isEmpty()) {
+        if (!(args[1].startsWith(".") && args[1].length() > 1)) {
             throw new IllegalArgumentException("File extension not specified. Use program arguments");
         }
     }
