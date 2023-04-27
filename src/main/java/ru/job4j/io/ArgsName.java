@@ -38,7 +38,7 @@ public class ArgsName {
         if (!arg.startsWith("-")) {
             throw new IllegalArgumentException(String.format("Error: This argument '%s' does not start with a '-' character", arg));
         }
-        if (arg.startsWith("-") && arg.split("=")[0].length() == 1) {
+        if (arg.startsWith("-=")) {
             throw new IllegalArgumentException(String.format("Error: This argument '%s' does not contain a key", arg));
         }
         if (arg.substring(arg.indexOf("=") + 1).isEmpty()) {
