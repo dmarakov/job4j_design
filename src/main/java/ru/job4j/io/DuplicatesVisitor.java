@@ -9,27 +9,23 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
-    private final Map<FileProperty, Path> map = new HashMap<>();
-    private final List<Path> list = new ArrayList<>();
+    private final Map<FileProperty, List<Path>> map = new HashMap<>();
 
 
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
         FileProperty fileProperty = new FileProperty(attrs.size(), file.toFile().getName());
-        if (!map.containsKey(fileProperty)) {
-            map.put(fileProperty, file);
-        } else {
-            list.add(file);
-            list.add(map.get(fileProperty));
-        }
+        map.putIfAbsent(fileProperty, new ArrayList<>());
+        map.get(fileProperty).add(file);
         return FileVisitResult.CONTINUE;
     }
 
-    public List<Path> getPaths() {
-        return list.stream()
-                .distinct().collect(Collectors.toList());
+    public void getPaths() {
+        map.entrySet().stream()
+                .filter(a -> a.getValue().size() > 1)
+                .flatMap(it -> it.getValue().stream())
+                .forEach(System.out::println);
     }
 }
