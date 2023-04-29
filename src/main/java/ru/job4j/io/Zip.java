@@ -10,11 +10,11 @@ import java.util.zip.ZipOutputStream;
 
 public class Zip {
 
-    public void packFiles(List<File> sources, File target) {
+    public void packFiles(List<Path> sources, File target) {
         try (ZipOutputStream zip = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(target)))) {
-            for (File source : sources) {
-                zip.putNextEntry(new ZipEntry(source.getPath()));
-                try (BufferedInputStream out = new BufferedInputStream(new FileInputStream(source))) {
+            for (Path source : sources) {
+                zip.putNextEntry(new ZipEntry(source.toString()));
+                try (BufferedInputStream out = new BufferedInputStream(new FileInputStream(source.toFile()))) {
                     zip.write(out.readAllBytes());
                 }
             }
@@ -48,11 +48,10 @@ public class Zip {
         String output = argsName.get("o");
         validation(directory, exclude, output);
         List<Path> path = Search.search(Paths.get(directory), it -> !it.toFile().getName().endsWith(exclude));
-        List<File> files = path.stream().map(Path::toFile).toList();
         System.out.println(path);
         Zip zip = new Zip();
         zip.packFiles(
-                files,
+                path,
                 new File("/Users/dmarakov/IdeaProjects/Test/" + output)
         );
     }
