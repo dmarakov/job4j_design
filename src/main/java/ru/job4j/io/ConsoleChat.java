@@ -24,11 +24,13 @@ public class ConsoleChat {
     public void run() {
         List<String> log = new ArrayList<>();
         Scanner in = new Scanner(System.in);
+        List<String> botAnswerList = new ArrayList<>(readPhrases());
+        int botAnswerSize = botAnswerList.size();
         String nextLine = null;
 
         while (!OUT.equals(nextLine)) {
             nextLine = in.nextLine();
-            String botAnswer = readPhrases().get((int) (Math.random() * readPhrases().size()));
+            String botAnswer = botAnswerList.get((int) (Math.random() * botAnswerSize));
             if (CONTINUE.equals(nextLine)) {
                 System.out.println(botAnswer);
                 log.add(nextLine + " - " + botAnswer + System.lineSeparator());
