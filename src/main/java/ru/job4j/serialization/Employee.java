@@ -1,8 +1,16 @@
 package ru.job4j.serialization;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Arrays;
 
+@XmlRootElement(name = "employee")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Employee {
+
+    @XmlAttribute
     private boolean isActive;
     private int age;
     private String login;
@@ -15,6 +23,10 @@ public class Employee {
         this.login = login;
         this.roles = roles;
         this.department = department;
+    }
+
+    public Employee() {
+
     }
 
     @Override
