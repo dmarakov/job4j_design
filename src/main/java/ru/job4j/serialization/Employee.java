@@ -29,6 +29,26 @@ public class Employee {
 
     }
 
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public String[] getRoles() {
+        return roles;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
     @Override
     public String toString() {
         return "Employee{"
