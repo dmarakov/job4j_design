@@ -20,5 +20,5 @@ create table hardware_applications(
     id serial primary key,
     name varchar(255),
     hardware_id int references hardware(id),
-	applications_number_id int references applications(id)
+	applications_number_id int references applications(id) unique
 );
