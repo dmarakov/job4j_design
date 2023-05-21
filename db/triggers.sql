@@ -12,7 +12,7 @@ $$
     begin
         update products
         set price = price + (price * 0.2)
-        where id = (select id from inserted);
+        where id in (select id from inserted);
         return new;
     end;
 $$
@@ -28,9 +28,7 @@ create trigger tax_trigger
     returns trigger as
 $$
     begin
-        update products
-        set price = price + price * 0.2
-        where id = new.id;
+        new.price = new.price + (new.price * 0.2);
         return new;
     end;
 $$
