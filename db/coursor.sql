@@ -26,9 +26,15 @@ insert into products (name, count, price) VALUES ('product_18', 18, 90);
 insert into products (name, count, price) VALUES ('product_19', 19, 95);
 insert into products (name, count, price) VALUES ('product_20', 20, 100);
 
+BEGIN;
+DECLARE
+    cursor_products cursor for
+                        select * from products;
 move last from cursor_products;
 move backward 5 from cursor_products;
 move backward 8 from cursor_products;
 move backward 5 from cursor_products;
 fetch backward from cursor_products;
+CLOSE cursor_products;
+COMMIT;
 
