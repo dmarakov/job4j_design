@@ -10,6 +10,7 @@ insert into customers (first_name, last_name, age, country) VALUES ('Alex', 'Iva
 insert into customers (first_name, last_name, age, country) VALUES ('Nik', 'Petrov', 35, 'Sweden');
 insert into customers (first_name, last_name, age, country) VALUES ('Ivan', 'Sidorov', 50, 'Russia');
 insert into customers (first_name, last_name, age, country) VALUES ('Test', 'Petrov', 20, 'France');
+insert into customers (first_name, last_name, age, country) VALUES ('Hello', 'Hi', 30, 'France');
 
 select * from customers where age = (select min(age) from customers);
 
