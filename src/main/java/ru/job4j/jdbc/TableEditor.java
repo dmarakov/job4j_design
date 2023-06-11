@@ -24,7 +24,7 @@ public class TableEditor implements AutoCloseable {
             String url = config.getProperty("url");
             String login = config.getProperty("login");
             String password = config.getProperty("password");
-            connection = DriverManager.getConnection(url,login,password);
+            connection = DriverManager.getConnection(url, login, password);
         }
     }
 
@@ -35,49 +35,49 @@ public class TableEditor implements AutoCloseable {
     }
 
     public void createTable(String tableName) throws Exception {
-            String sql = String.format(
-                    "CREATE TABLE IF NOT EXISTS %s();",
-                    tableName
-            );
-            getStatement(sql);
+        String sql = String.format(
+                "CREATE TABLE IF NOT EXISTS %s();",
+                tableName
+        );
+        getStatement(sql);
     }
 
 
     public void dropTable(String tableName) throws Exception {
-            String sql = String.format(
-                    "DROP TABLE %s;",
-                    tableName
-            );
-            getStatement(sql);
+        String sql = String.format(
+                "DROP TABLE %s;",
+                tableName
+        );
+        getStatement(sql);
     }
 
     public void addColumn(String tableName, String columnName, String type) throws Exception {
-            String sql = String.format(
-                    "ALTER TABLE %s ADD %s %s;",
-                    tableName,
-                    columnName,
-                    type
-            );
-            getStatement(sql);
+        String sql = String.format(
+                "ALTER TABLE %s ADD %s %s;",
+                tableName,
+                columnName,
+                type
+        );
+        getStatement(sql);
     }
 
     public void dropColumn(String tableName, String columnName) throws Exception {
-            String sql = String.format(
-                    "ALTER TABLE %s DROP COLUMN %s;",
-                    tableName,
-                    columnName
-            );
-            getStatement(sql);
+        String sql = String.format(
+                "ALTER TABLE %s DROP COLUMN %s;",
+                tableName,
+                columnName
+        );
+        getStatement(sql);
     }
 
     public void renameColumn(String tableName, String columnName, String newColumnName) throws Exception {
-            String sql = String.format(
-                    "ALTER TABLE %s RENAME COLUMN %s TO %s",
-                    tableName,
-                    columnName,
-                    newColumnName
-            );
-            getStatement(sql);
+        String sql = String.format(
+                "ALTER TABLE %s RENAME COLUMN %s TO %s",
+                tableName,
+                columnName,
+                newColumnName
+        );
+        getStatement(sql);
     }
 
 
@@ -113,13 +113,13 @@ public class TableEditor implements AutoCloseable {
         System.out.println(metaData.getUserName());
         System.out.println(metaData.getURL());
         tb.createTable("JDBC");
-        System.out.println( tb.getTableScheme("JDBC"));
-        tb.addColumn("JDBC","Model","TEXT");
-        System.out.println( tb.getTableScheme("JDBC"));
+        System.out.println(tb.getTableScheme("JDBC"));
+        tb.addColumn("JDBC", "Model", "TEXT");
+        System.out.println(tb.getTableScheme("JDBC"));
         tb.renameColumn("JDBC", "Model", "New_Model");
-        System.out.println( tb.getTableScheme("JDBC"));
-        tb.dropColumn("JDBC","new_model");
-        System.out.println( tb.getTableScheme("JDBC"));
+        System.out.println(tb.getTableScheme("JDBC"));
+        tb.dropColumn("JDBC", "new_model");
+        System.out.println(tb.getTableScheme("JDBC"));
         tb.dropTable("JDBC");
 
     }
