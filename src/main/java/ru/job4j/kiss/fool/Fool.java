@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Fool {
 
-    static public String fizzBuzzCondition(int startAt) {
+    public static String fizzBuzzCondition(int startAt) {
         String rsl;
         if (startAt % 3 == 0 && startAt % 5 == 0) {
             rsl = "FizzBuzz";
