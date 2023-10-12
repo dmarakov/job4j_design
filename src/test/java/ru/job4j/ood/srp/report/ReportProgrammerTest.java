@@ -10,23 +10,24 @@ import java.util.Calendar;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ReportEngineTest {
+public class ReportProgrammerTest {
 
     @Test
     public void whenOldGenerated() {
         MemStore store = new MemStore();
         Calendar now = Calendar.getInstance();
+        String delimiter = ",";
         Employee worker = new Employee("Ivan", now, now, 100);
         DateTimeParser<Calendar> parser = new ReportDateTimeParser();
         store.add(worker);
-        Report engine = new ReportEngine(store, parser);
+        Report engine = new ReportProgrammer(store, parser, delimiter);
         StringBuilder expect = new StringBuilder()
-                .append("Name; Hired; Fired; Salary;")
+                .append("Name,Hired,Fired,Salary,")
                 .append(System.lineSeparator())
-                .append(worker.getName()).append(" ")
-                .append(parser.parse(worker.getHired())).append(" ")
-                .append(parser.parse(worker.getFired())).append(" ")
-                .append(worker.getSalary())
+                .append(worker.getName()).append(",")
+                .append(parser.parse(worker.getHired())).append(",")
+                .append(parser.parse(worker.getFired())).append(",")
+                .append(worker.getSalary()).append(",")
                 .append(System.lineSeparator());
         assertThat(engine.generate(em -> true)).isEqualTo(expect.toString());
     }
