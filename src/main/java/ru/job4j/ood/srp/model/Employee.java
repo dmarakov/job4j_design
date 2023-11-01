@@ -1,12 +1,22 @@
 package ru.job4j.ood.srp.model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Calendar;
 import java.util.Objects;
 
+@XmlRootElement(name = "employee")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Employee {
+    @XmlElement
     private String name;
+    @XmlElement
     private Calendar hired;
+    @XmlElement
     private Calendar fired;
+    @XmlElement
     private double salary;
 
     public Employee(String name, Calendar hired, Calendar fired, double salary) {
@@ -14,6 +24,10 @@ public class Employee {
         this.hired = hired;
         this.fired = fired;
         this.salary = salary;
+    }
+
+    public Employee() {
+
     }
 
     public String getName() {
@@ -48,7 +62,6 @@ public class Employee {
         this.salary = salary;
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -65,5 +78,4 @@ public class Employee {
     public int hashCode() {
         return Objects.hash(name);
     }
-
 }
