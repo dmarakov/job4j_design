@@ -15,7 +15,7 @@ public class ReportJSON implements Report {
 
     public ReportJSON(Store store) {
         this.store = store;
-        this.gson = new GsonBuilder().create();
+        this.gson = new GsonBuilder().setPrettyPrinting().create();
 
     }
 
