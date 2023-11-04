@@ -22,13 +22,21 @@ class ReportXmlTest {
         store.add(worker);
         store.add(worker1);
         Report reportXml = new ReportXML(store);
-        String expect = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>"
-                + "<employees><employees>"
-                + "<name>Ivan</name><hired>" + nowFormattedDate + "</hired><fired>"
-                + nowFormattedDate + "</fired><salary>100.0</salary></employees>"
-                + "<employees><name>Sasha</name><hired>" + nowFormattedDate
-                + "</hired><fired>" + nowFormattedDate + "</fired><salary>200.0</salary></employees>"
-                + "</employees>";
-        Assertions.assertEquals(expect, reportXml.generate(em -> true).replaceAll("\\s*<\\s*", "<").replaceAll("\\s*>\\s*", ">"));
+        String expect = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
+                + "<employees>\n"
+                + "    <employees>\n"
+                + "        <name>Ivan</name>\n"
+                + "        <hired>" + nowFormattedDate + "</hired>\n"
+                + "        <fired>" + nowFormattedDate + "</fired>\n"
+                + "        <salary>100.0</salary>\n"
+                + "    </employees>\n"
+                + "    <employees>\n"
+                + "        <name>Sasha</name>\n"
+                + "        <hired>" + nowFormattedDate + "</hired>\n"
+                + "        <fired>" + nowFormattedDate + "</fired>\n"
+                + "        <salary>200.0</salary>\n"
+                + "    </employees>\n"
+                + "</employees>\n";
+        Assertions.assertEquals(expect, reportXml.generate(em -> true));
     }
 }

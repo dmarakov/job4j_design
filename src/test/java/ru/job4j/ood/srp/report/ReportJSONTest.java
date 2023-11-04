@@ -18,36 +18,48 @@ class ReportJsonTest {
         store.add(worker);
         store.add(worker1);
         Report reportJson = new ReportJSON(store);
-        String expect = "[{\"name\":\"Ivan\",\"hired\":"
-                + "{\"year\":" + now.get(Calendar.YEAR)
-                + ",\"month\":" + now.get(Calendar.MONTH)
-                + ",\"dayOfMonth\":" + now.get(Calendar.DAY_OF_MONTH)
-                + ",\"hourOfDay\":" + now.get(Calendar.HOUR_OF_DAY)
-                + ",\"minute\":" + now.get(Calendar.MINUTE)
-                + ",\"second\":" + now.get(Calendar.SECOND)
-                + "},\"fired\":"
-                + "{\"year\":" + now.get(Calendar.YEAR)
-                + ",\"month\":" + now.get(Calendar.MONTH)
-                + ",\"dayOfMonth\":" + now.get(Calendar.DAY_OF_MONTH)
-                + ",\"hourOfDay\":" + now.get(Calendar.HOUR_OF_DAY)
-                + ",\"minute\":" + now.get(Calendar.MINUTE)
-                + ",\"second\":" + now.get(Calendar.SECOND)
-                + "},\"salary\":100.0},"
-                + "{\"name\":\"Sasha\",\"hired\":"
-                + "{\"year\":" + now.get(Calendar.YEAR)
-                + ",\"month\":" + now.get(Calendar.MONTH)
-                + ",\"dayOfMonth\":" + now.get(Calendar.DAY_OF_MONTH)
-                + ",\"hourOfDay\":" + now.get(Calendar.HOUR_OF_DAY)
-                + ",\"minute\":" + now.get(Calendar.MINUTE)
-                + ",\"second\":" + now.get(Calendar.SECOND)
-                + "},\"fired\":"
-                + "{\"year\":" + now.get(Calendar.YEAR)
-                + ",\"month\":" + now.get(Calendar.MONTH)
-                + ",\"dayOfMonth\":" + now.get(Calendar.DAY_OF_MONTH)
-                + ",\"hourOfDay\":" + now.get(Calendar.HOUR_OF_DAY)
-                + ",\"minute\":" + now.get(Calendar.MINUTE)
-                + ",\"second\":" + now.get(Calendar.SECOND)
-                + "},\"salary\":200.0}]";
-        Assertions.assertEquals(expect, reportJson.generate(em -> true).replaceAll("\\s", ""));
+        String expect = "[\n"
+                + "  {\n"
+                + "    \"name\": \"Ivan\",\n"
+                + "    \"hired\": {\n"
+                + "      \"year\": " + now.get(Calendar.YEAR) + ",\n"
+                + "      \"month\": " + now.get(Calendar.MONTH) + ",\n"
+                + "      \"dayOfMonth\": " + now.get(Calendar.DAY_OF_MONTH) + ",\n"
+                + "      \"hourOfDay\": " + now.get(Calendar.HOUR_OF_DAY) + ",\n"
+                + "      \"minute\": " + now.get(Calendar.MINUTE) + ",\n"
+                + "      \"second\": " + now.get(Calendar.SECOND) + "\n"
+                + "    },\n"
+                + "    \"fired\": {\n"
+                + "      \"year\": " + now.get(Calendar.YEAR) + ",\n"
+                + "      \"month\": " + now.get(Calendar.MONTH) + ",\n"
+                + "      \"dayOfMonth\": " + now.get(Calendar.DAY_OF_MONTH) + ",\n"
+                + "      \"hourOfDay\": " + now.get(Calendar.HOUR_OF_DAY) + ",\n"
+                + "      \"minute\": " + now.get(Calendar.MINUTE) + ",\n"
+                + "      \"second\": " + now.get(Calendar.SECOND) + "\n"
+                + "    },\n"
+                + "    \"salary\": 100.0\n"
+                + "  },\n"
+                + "  {\n"
+                + "    \"name\": \"Sasha\",\n"
+                + "    \"hired\": {\n"
+                + "      \"year\": " + now.get(Calendar.YEAR) + ",\n"
+                + "      \"month\": " + now.get(Calendar.MONTH) + ",\n"
+                + "      \"dayOfMonth\": " + now.get(Calendar.DAY_OF_MONTH) + ",\n"
+                + "      \"hourOfDay\": " + now.get(Calendar.HOUR_OF_DAY) + ",\n"
+                + "      \"minute\": " + now.get(Calendar.MINUTE) + ",\n"
+                + "      \"second\": " + now.get(Calendar.SECOND) + "\n"
+                + "    },\n"
+                + "    \"fired\": {\n"
+                + "      \"year\": " + now.get(Calendar.YEAR) + ",\n"
+                + "      \"month\": " + now.get(Calendar.MONTH) + ",\n"
+                + "      \"dayOfMonth\": " + now.get(Calendar.DAY_OF_MONTH) + ",\n"
+                + "      \"hourOfDay\": " + now.get(Calendar.HOUR_OF_DAY) + ",\n"
+                + "      \"minute\": " + now.get(Calendar.MINUTE) + ",\n"
+                + "      \"second\": " + now.get(Calendar.SECOND) + "\n"
+                + "    },\n"
+                + "    \"salary\": 200.0\n"
+                + "  }\n"
+                + "]";
+        Assertions.assertEquals(expect, reportJson.generate(em -> true));
     }
 }
