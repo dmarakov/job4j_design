@@ -2,6 +2,7 @@ package ru.job4j.ood.srp.report;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import ru.job4j.ood.srp.formatter.ReportDateTimeParser;
 import ru.job4j.ood.srp.model.Employee;
 import ru.job4j.ood.srp.store.MemStore;
 
@@ -17,49 +18,27 @@ class ReportJsonTest {
         Employee worker1 = new Employee("Sasha", now, now, 200);
         store.add(worker);
         store.add(worker1);
+        ReportDateTimeParser parser = new ReportDateTimeParser();
         Report reportJson = new ReportJSON(store);
-        String expect = "[\n"
-                + "  {\n"
-                + "    \"name\": \"Ivan\",\n"
-                + "    \"hired\": {\n"
-                + "      \"year\": " + now.get(Calendar.YEAR) + ",\n"
-                + "      \"month\": " + now.get(Calendar.MONTH) + ",\n"
-                + "      \"dayOfMonth\": " + now.get(Calendar.DAY_OF_MONTH) + ",\n"
-                + "      \"hourOfDay\": " + now.get(Calendar.HOUR_OF_DAY) + ",\n"
-                + "      \"minute\": " + now.get(Calendar.MINUTE) + ",\n"
-                + "      \"second\": " + now.get(Calendar.SECOND) + "\n"
-                + "    },\n"
-                + "    \"fired\": {\n"
-                + "      \"year\": " + now.get(Calendar.YEAR) + ",\n"
-                + "      \"month\": " + now.get(Calendar.MONTH) + ",\n"
-                + "      \"dayOfMonth\": " + now.get(Calendar.DAY_OF_MONTH) + ",\n"
-                + "      \"hourOfDay\": " + now.get(Calendar.HOUR_OF_DAY) + ",\n"
-                + "      \"minute\": " + now.get(Calendar.MINUTE) + ",\n"
-                + "      \"second\": " + now.get(Calendar.SECOND) + "\n"
-                + "    },\n"
-                + "    \"salary\": 100.0\n"
-                + "  },\n"
-                + "  {\n"
-                + "    \"name\": \"Sasha\",\n"
-                + "    \"hired\": {\n"
-                + "      \"year\": " + now.get(Calendar.YEAR) + ",\n"
-                + "      \"month\": " + now.get(Calendar.MONTH) + ",\n"
-                + "      \"dayOfMonth\": " + now.get(Calendar.DAY_OF_MONTH) + ",\n"
-                + "      \"hourOfDay\": " + now.get(Calendar.HOUR_OF_DAY) + ",\n"
-                + "      \"minute\": " + now.get(Calendar.MINUTE) + ",\n"
-                + "      \"second\": " + now.get(Calendar.SECOND) + "\n"
-                + "    },\n"
-                + "    \"fired\": {\n"
-                + "      \"year\": " + now.get(Calendar.YEAR) + ",\n"
-                + "      \"month\": " + now.get(Calendar.MONTH) + ",\n"
-                + "      \"dayOfMonth\": " + now.get(Calendar.DAY_OF_MONTH) + ",\n"
-                + "      \"hourOfDay\": " + now.get(Calendar.HOUR_OF_DAY) + ",\n"
-                + "      \"minute\": " + now.get(Calendar.MINUTE) + ",\n"
-                + "      \"second\": " + now.get(Calendar.SECOND) + "\n"
-                + "    },\n"
-                + "    \"salary\": 200.0\n"
-                + "  }\n"
-                + "]";
+
+        String expect = String.format("""
+                        [
+                          {
+                            "name": "Ivan",
+                            "hired": "%s",
+                            "fired": "%s",
+                            "salary": 100.0
+                          },
+                          {
+                            "name": "Sasha",
+                            "hired": "%s",
+                            "fired": "%s",
+                            "salary": 200.0
+                          }
+                        ]""",
+                parser.parse(worker.getHired()), parser.parse(worker.getFired()),
+                parser.parse(worker1.getHired()), parser.parse(worker1.getFired())
+        );
         Assertions.assertEquals(expect, reportJson.generate(em -> true));
     }
 }

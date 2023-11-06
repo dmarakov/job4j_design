@@ -1,9 +1,12 @@
 package ru.job4j.ood.srp.model;
 
+import ru.job4j.ood.srp.formatter.XMLCalendarSerializer;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Calendar;
 import java.util.Objects;
 
@@ -13,8 +16,10 @@ public class Employee {
     @XmlElement
     private String name;
     @XmlElement
+    @XmlJavaTypeAdapter(XMLCalendarSerializer.class)
     private Calendar hired;
     @XmlElement
+    @XmlJavaTypeAdapter(XMLCalendarSerializer.class)
     private Calendar fired;
     @XmlElement
     private double salary;
