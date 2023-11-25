@@ -6,31 +6,30 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
-@Disabled
+
 class CarTest {
 
     @Test
     public void checkPassengerCar() {
-        Parking parking = new Parking();
-        Car car = new PassengerCar();
-        Car car1 = new PassengerCar();
-        CarChecking cc = new CarChecking();
-        List<Car> carList = List.of(car, car1);
+        AbstractParking parking = new MixedParking(4, 4);
+        AbstractCar car = new PassengerCar(1);
+        AbstractCar car1 = new PassengerCar(1);
+        parking.add(car);
+        parking.add(car1);
         List<Car> expected = List.of(car, car1);
-        cc.check(carList);
-        assertThat(parking.getList()).hasSameElementsAs(expected);
+        assertThat(parking.getPassangerCarList()).hasSameElementsAs(expected);
     }
 
     @Test
     public void checkTruck() {
-        Parking parking = new Parking();
-        Car car = new PassengerCar();
-        Car car1 = new PassengerCar();
-        CarChecking cc = new CarChecking();
-        List<Car> carList = List.of(car, car1);
-        List<Car> expected = List.of(car, car1);
-        cc.check(carList);
-        assertThat(parking.getList()).hasSameElementsAs(expected);
+        MixedParking parking = new MixedParking(4, 4);
+        AbstractCar car = new Truck(2);
+        AbstractCar car1 = new Truck(3);
+        parking.add(car);
+        parking.add(car1);
+        List<Car> expected = List.of(car);
+        List<Car> expected1 = List.of(car1);
+        assertThat(parking.getTruckList()).hasSameElementsAs(expected);
+        assertThat(parking.getPassangerCarList()).hasSameElementsAs(expected1);
     }
 }
