@@ -6,4 +6,5 @@ public interface Store {
     public boolean check(Food food);
 
     public List<Food> getList();
+    public boolean setOriginalPrice(Food food);
 }
